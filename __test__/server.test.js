@@ -117,7 +117,7 @@ describe('Auth API', () => {
   //   expect(response.status).toBe(201);
   //   expect(userObject.name).toBe('Wonders-of-Land');
   // });
-
+  //
   //   it('can get all food items', async () => {
   //     const response = await mockRequest.get('/food');
   //     expect(response.status).toBe(200);
