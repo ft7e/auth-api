@@ -7,7 +7,7 @@ module.exports = (capability) => {
       if (req.user.actions.includes(capability)) {
         next();
       } else {
-        next('Access Denied');
+        res.status(404).send('Access denied').end();
       }
     } catch (e) {
       next('invalid login');

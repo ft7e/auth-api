@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
         next();
       })
       .catch((e) => {
-        next('Invalid signin, basicAuth');
+        res.status(503).send('wrong username/password');
       });
   }
 };
