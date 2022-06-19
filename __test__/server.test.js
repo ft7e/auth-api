@@ -105,18 +105,18 @@ describe('Auth API', () => {
     expect(bearerResponse.status).toBe(200);
     expect(userObject.role).toBe('admin');
   });
-  it('can add an article as an admin ', async () => {
-    let { username, password } = userData.testUserAdmin;
-    const login = await mockRequest.post('/signin').auth(username, password);
-    const userObject = login.body;
-    accessToken = userObject.token;
-    const response = await mockRequest.post('/article').send({
-      name: 'Wonders-of-Land',
-      catigory: 'Science',
-    });
-    expect(response.status).toBe(201);
-    expect(userObject.name).toBe('Wonders-of-Land');
-  });
+  // it('can add an article as an admin ', async () => {
+  //   let { username, password } = userData.testUserAdmin;
+  //   const login = await mockRequest.post('/signin').auth(username, password);
+  //   const userObject = login.body;
+  //   accessToken = userObject.token;
+  //   const response = await mockRequest.post('/article').send({
+  //     name: 'Wonders-of-Land',
+  //     catigory: 'Science',
+  //   });
+  //   expect(response.status).toBe(201);
+  //   expect(userObject.name).toBe('Wonders-of-Land');
+  // });
 
   //   it('can get all food items', async () => {
   //     const response = await mockRequest.get('/food');
