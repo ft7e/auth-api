@@ -41,7 +41,7 @@ User.basicAuthentication = async function (username, password) {
   let valid = await bcrypt.compare(password, user.password);
   if (valid) {
     let newToken = jwt.sign({ username: user.username }, SECRET, {
-      expiresIn: '15m',
+      expiresIn: '1h',
     });
     user.token = newToken;
     return user;

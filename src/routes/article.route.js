@@ -14,12 +14,20 @@ articleRouter.delete('/article/:id', bearer, acl('delete'), deleteArticle);
 // functions
 async function getArticle(req, res) {
   let record = await Article.read();
-  res.status(200).json(record);
+  if (record) {
+    res.status(200).json(record);
+  } else {
+    res.status(404).json({ Error: 'Element not found' });
+  }
 }
 async function getOneArticle(req, res) {
   let articleId = parseInt(req.params.id);
   let record = await Article.read(articleId);
-  res.status(200).json(record);
+  if (record) {
+    res.status(200).json(record);
+  } else {
+    res.status(404).json({ Error: 'Element not found' });
+  }
 }
 async function addArticle(req, res) {
   let record = await Article.create(req.body);
@@ -29,8 +37,8 @@ async function updateArticle(req, res) {
   let articleId = parseInt(req.params.id);
   let foundArticle = await Article.read(articleId);
   if (foundArticle) {
-    let foundArticle = await Article.update(req.body);
-    res.status(201).json(foundArticle);
+    let record = await foundArticle.update(req.body);
+    res.status(201).json(record);
   } else {
     res.status(404).json({
       Message: 'Article not found',
@@ -42,7 +50,7 @@ async function deleteArticle(req, res) {
   let foundArticle = await Article.read(articleId);
   if (foundArticle) {
     let deletedArticle = await Article.delete(articleId);
-    res.status(204).send('Article deleted successfully');
+    res.status(204).json(deletedArticle);
   } else {
     res.status(404).json({ message: 'Article not found' });
   }

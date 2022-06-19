@@ -14,11 +14,11 @@ class Collection {
   }
   async read(data_id) {
     try {
-      let record = null;
       if (data_id) {
         let findElement = await this.model.findOne({ where: { id: data_id } });
         return findElement;
-      } else {
+      } else if (typeof data_id === 'undefined') {
+        console.log(data_id);
         let record = await this.model.findAll();
         return record;
       }
@@ -40,7 +40,7 @@ class Collection {
     }
     try {
       let deleted = await this.model.destroy({ where: { id: data_id } });
-      return deleted;
+      return { Condition: 'Success' };
     } catch (e) {
       console.error('error in deleting record in model ', this.model);
     }

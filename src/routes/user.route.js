@@ -14,7 +14,8 @@ userRouter.get('/', (req, res) => {
 });
 userRouter.post('/signup', signup);
 userRouter.post('/signin', basic, signin);
-userRouter.get('/user', bearer, getUser);
+userRouter.get('/users', bearer, acl('delete'), getUsers);
+userRouter.get('/secret', bearer, secret);
 
 // functions
 
@@ -38,9 +39,15 @@ async function signin(req, res) {
   res.status(200).json(req.user);
 }
 
-async function getUser(req, res) {
+async function getUsers(req, res) {
   res.status(200).json({
-    Message: "You are allowed to View this page cuz you're logged in",
+    Message: "You are allowed to View this page cuz you're a logged in admin",
+  });
+}
+
+async function secret(req, res) {
+  res.status(200).json({
+    Message: 'You are allowed to view this page becuase you are logged in',
   });
 }
 
